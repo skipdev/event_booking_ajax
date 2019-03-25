@@ -1,0 +1,34 @@
+.login_form {
+    margin-top: 5em;
+    background-color: #1DD05E;
+    color: white;
+    align-self: center;
+    opacity: 90%;
+    border-radius: 1em;
+    padding: 2em;
+    width: 30%;
+}
+
+.login_field {
+    font-size: 1.3em;
+    border-radius: 20px;
+    padding: .8em;
+    color: #1DD05E;
+    border: solid;
+    display: block;
+    text-align: left;
+    margin-bottom: 1em;
+    width: 100%;
+}
+
+.login_button {
+    text-align: center;
+    align-self: center;
+    font-size: 1.3em;
+    color: white;
+    border: solid white;
+    background-color: #1DD05E;
+    margin-top: 2em;
+    margin-bottom: 1em;
+    width: 30%;
+}
