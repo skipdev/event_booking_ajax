@@ -39,10 +39,10 @@ if ($row = $stmt->fetch()) {
 
             <!--If the user is logged in, welcome them by name-->
             <?php if($loggedIn): ?>
-                <p class="index_welcome">Hey there, <?php echo $name ?>!</p>
+                <h2 class="index_welcome">Welcome, <?php echo $name ?>!</h2>
 
                 <!--Allow user to search for a venue-->
-                <p>Search for a venue here: </p>
+                <h3>Search for a venue here: </h3>
                 <form action="" method="post" class="center generic_form flex column">
                     <p class="generic_label">Venue Name: </p>
                     <input type="text" name="venueDesc" class="generic_field"/>
@@ -50,25 +50,7 @@ if ($row = $stmt->fetch()) {
                     <input type="submit" name='submit' value="Search →" class='generic_button generic_field'/>
                 </form>
 
-                <!--Allow user to add a new venue-->
-                <p>You can add a new venue below: </p>
-                <form action="" method="post" class="center generic_form flex column">
-                    <p class="generic_label">Venue Name: </p>
-                    <input type="text" name="venueName" class="generic_field">
-                    <p class="generic_label">Venue Type: </p>
-                    <select name="venueType" class="generic_field generic_dropdown">
-                        <option value="null">Please Select: ↓</option>
-                        <option value="Restaurant">Restaurant</option>
-                        <option value="Bar">Bar</option>
-                        <option value="Pub">Pub</option>
-                        <option value="Café">Café</option>
-                        <option value="Fast Food">Fast Food</option>
-                        <option value="Club">Club</option>
-                    </select>
-                    <p class="generic_label">Description: </p>
-                    <input type="text" name="venueDesc" class="generic_field"/>
-                    <input type="submit" name='submit' value="Submit →" class='generic_button generic_field'/>
-                </form>
+                <h3>You can also add a new venue by clicking <a href="addVenue.php">here</a>.</h3>
 
                 <a href="logout.php">Click to log out</a>
             <?php else: ?>

@@ -73,3 +73,10 @@
     align-self: center;
     width: 45%;
 }
+
+a:link,
+a:visited,
+a:hover,
+a:active {
+    color: #1DD05E;
+}
