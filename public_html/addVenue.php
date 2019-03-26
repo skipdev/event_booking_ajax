@@ -8,9 +8,10 @@
 session_start();
 require 'config.php';
 require 'functions.php';
-include 'insertVenue.php';
 
 $loggedIn = session_status() == PHP_SESSION_ACTIVE;
+$name = $_SESSION["user"];
+
 ?>
 
 <html>
@@ -25,12 +26,12 @@ $loggedIn = session_status() == PHP_SESSION_ACTIVE;
 
         <!--Allow user to add a new venue-->
         <h1>Add a new Venue</h1>
-        <form action="" method="post" class="center generic_form flex column" id="addVenue">
-            <p id="message">you goon</p>
+        <form action="" method="post" class="center generic_form flex column">
             <p class="generic_label">Venue Name: </p>
             <input type="text" name="venueName" class="generic_field">
             <p class="generic_label">Venue Type: </p>
             <select name="venueType" class="generic_field generic_dropdown">
+                <option value="null">Please Select: ↓</option>
                 <option value="Restaurant">Restaurant</option>
                 <option value="Bar">Bar</option>
                 <option value="Pub">Pub</option>
@@ -42,9 +43,9 @@ $loggedIn = session_status() == PHP_SESSION_ACTIVE;
             <input type="text" name="venueDesc" class="generic_field"/>
             <input type="submit" name='submit' value="Submit →" class='generic_button generic_field'/>
         </form>
-        <?php include 'display.php' ?>
-        <a href="index.php">Back to search</a>
-        <a href="logout.php">Click to log out</a>
+
+            <a href="index.php">Back to search</a>
+            <a href="logout.php">Click to log out</a>
         <?php else: ?>
             <h1>Hey there! It seems that you're not logged in...</h1>
             <a href="login.php">Click here to access this page.</a>
