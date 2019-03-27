@@ -10,7 +10,7 @@
 }
 
 /*get the 'recommended' table cells only*/
-.venues_table--cell:nth-child(3n+4) {
+.venues_table--cell:nth-child(4n+1) {
     text-align: center;
     color: #1DD05E;
     background-color: white;

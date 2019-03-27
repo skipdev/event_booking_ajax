@@ -7,9 +7,9 @@
  */
 
 require 'config.php';
+$rowCount = 0;
 try {
-    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    $stmt = $conn->prepare("SELECT name, type, description, recommended FROM venues");
+    $stmt = $conn->prepare("SELECT id, name, type, description, recommended FROM venues");
     $stmt->execute();
     //associative array
     $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -17,15 +17,26 @@ try {
     print "<table class='venues_table'>\n";
     print "<tr>\n";
 
-    foreach ($result[0] as $key => $useless){
+    foreach ($result[0] as $key => $nothing){
         print "<th>$key</th>";
     }
     print "</tr>";
 
+    $columnCount = 0;
     foreach ($result as $row){
-        print "<tr>";
-        foreach ($row as $key => $val){
-            print "<td class='venues_table--cell'>$val</td>";
+        $rowCount =+ 1;
+        print "<tr class='venues_table--row-".$rowCount."'>";
+        foreach ($row as $key => $value){
+            $columnCount += 1;
+            if($columnCount = 4) {
+                print "<td class='venues_table--cell venues_table--cell-rec'>$value</td>";
+            }
+            else if ($columnCount = 0){
+                print "<td class='venues_table--cell venues_table--cell-id'>$value</td>";
+            }
+            else {
+                print "<td class='venues_table--cell'>$value</td>";
+            }
         }
         print "<td><i class='grey fas fa-heart'></i></td>";
         print "</tr>\n";
