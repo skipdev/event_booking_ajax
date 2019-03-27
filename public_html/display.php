@@ -5,43 +5,36 @@
  * Date: 2019-03-26
  * Time: 15:38
  */
-echo "<table style='border: solid 1px black;'>";
- echo "<tr><th>Name</th><th>Type</th><th>Description</th><th>Recommended</th></tr>";
-
-class TableRows extends RecursiveIteratorIterator {
-    function __construct($it) {
-        parent::__construct($it, self::LEAVES_ONLY);
-    }
-
-    function current() {
-        return "<td style='width: 150px; border: 1px solid black;'>" . parent::current(). "</td>";
-    }
-
-    function beginChildren() {
-        echo "<tr>";
-    }
-
-    function endChildren() {
-        echo "</tr>" . "\n";
-    }
-}
 
 require 'config.php';
 try {
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     $stmt = $conn->prepare("SELECT name, type, description, recommended FROM venues");
     $stmt->execute();
+    //associative array
+    $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-    // set the resulting array to associative
-    $result = $stmt->setFetchMode(PDO::FETCH_ASSOC);
+    print "<table class='venues_table'>\n";
+    print "<tr>\n";
 
-    foreach(new TableRows(new RecursiveArrayIterator($stmt->fetchAll())) as $k=>$v) {
-        echo $v;
+    foreach ($result[0] as $key => $useless){
+        print "<th>$key</th>";
     }
+    print "</tr>";
+
+    foreach ($result as $row){
+        print "<tr>";
+        foreach ($row as $key => $val){
+            print "<td class='venues_table--cell'>$val</td>";
+        }
+        print "<td><i class='grey fas fa-heart'></i></td>";
+        print "</tr>\n";
+    }
+
+    print "</table>\n";
+
 }
-catch(PDOException $e) {
-    echo "Error: " . $e->getMessage();
+catch(PDOException $err) {
+    echo "Error: " . $err->getMessage();
 }
-$conn = null;
-echo "</table>";
-?>
+

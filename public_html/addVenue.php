@@ -9,6 +9,7 @@ session_start();
 require 'config.php';
 require 'functions.php';
 include 'insertVenue.php';
+include 'recommend.php';
 
 $loggedIn = session_status() == PHP_SESSION_ACTIVE;
 ?>
@@ -17,6 +18,8 @@ $loggedIn = session_status() == PHP_SESSION_ACTIVE;
 <head>
     <title>home</title>
     <link rel="stylesheet" type="text/css" href="css/general.css">
+    <link rel="stylesheet" type="text/css" href="css/display.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
 </head>
 <body>
 <div class="inner">
@@ -26,7 +29,6 @@ $loggedIn = session_status() == PHP_SESSION_ACTIVE;
         <!--Allow user to add a new venue-->
         <h1>Add a new Venue</h1>
         <form action="" method="post" class="center generic_form flex column" id="addVenue">
-            <p id="message">you goon</p>
             <p class="generic_label">Venue Name: </p>
             <input type="text" name="venueName" class="generic_field">
             <p class="generic_label">Venue Type: </p>

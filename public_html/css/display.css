@@ -1,0 +1,17 @@
+.venues_table {
+    padding: 2em;
+}
+
+.venues_table--cell {
+    background-color: #1DD05E;
+    padding: .5em;
+    margin: 2em;
+    color: white;
+}
+
+/*get the 'recommended' table cells only*/
+.venues_table--cell:nth-child(3n+4) {
+    text-align: center;
+    color: #1DD05E;
+    background-color: white;
+}
