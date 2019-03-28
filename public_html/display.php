@@ -33,7 +33,7 @@ try {
             echo "<td class='venues_table--cell' id='desc_".$value['ID']."'>" . $value['description'] . "</td>";
             echo "<td class='venues_table--cell' id='user_".$value['ID']."'>" . $value['username'] . "</td>";
             echo "<td class='venues_table--cell recommended_cell' id='rec_".$value['ID']."'>" . $value['recommended'] . "</td>";
-            echo "<td><i class='grey fas fa-heart' id='heart_".$value['ID']."'></i></td>";
+            echo "<td><i onClick='updateRec(".$value['ID'].");' class='grey fas fa-heart' id='heart_".$value['ID']."'></i></td>";
         echo "</tr>";
         $i++;
     }

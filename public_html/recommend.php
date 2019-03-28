@@ -20,17 +20,36 @@ try {
     foreach ($result as $key => $value) {
 
         // When a heart is clicked, change it to green and add one to the recommended counter
+        echo "<script src='https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js'></script>";
         echo "<script>
         document.getElementById('heart_" . $value['ID'] . "').onclick = function() {
-            document.getElementById('heart_" . $value['ID'] . "').classList.toggle('grey');
-            document.getElementById('heart_" . $value['ID'] . "').classList.toggle('green');
             if (document.getElementById('heart_" . $value['ID'] . "').classList.contains('green')) {
-                //goon1
+                document.getElementById('heart_" . $value['ID'] . "').classList.remove('green');
+                document.getElementById('heart_" . $value['ID'] . "').classList.add('grey');
+                jQuery.ajax({
+                type: 'POST',
+                url: 'minusOne.php',
+                data: 'id='+" . $value['ID'] . ",
+                cache: false,
+                success: function(response) {
+                 window.location.reload();
+                }
+            });
             }
             else {
-                //goon2
+                document.getElementById('heart_" . $value['ID'] . "').classList.remove('grey');
+                document.getElementById('heart_" . $value['ID'] . "').classList.add('green');
+                jQuery.ajax({
+                type: 'POST',
+                url: 'addOne.php',
+                data: 'id='+" . $value['ID'] . ",
+                cache: false,
+                success: function(response) {
+                    window.location.reload();
+                }
+            });
             }
-        };
+       };
         </script>";
 
         $i++;
