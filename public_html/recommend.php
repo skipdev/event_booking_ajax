@@ -8,10 +8,34 @@
 
 //Allows user to recommend a place
 
-//echo
-//"<script src='https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js'>
-//    $('.venues_table-recommend-button').click(function() {
-//        console.log('hi');
-//        console.log(this);
-//    });
-//</script>";
+require 'config.php';
+
+try {
+    $query = "SELECT * FROM venues";
+    $stmt = $conn->prepare($query);
+    $stmt->execute();
+    $result = $stmt->fetchAll();
+
+    $i = 0;
+    foreach ($result as $key => $value) {
+
+        // When a heart is clicked, change it to green and add one to the recommended counter
+        echo "<script>
+        document.getElementById('heart_" . $value['ID'] . "').onclick = function() {
+            document.getElementById('heart_" . $value['ID'] . "').classList.toggle('grey');
+            document.getElementById('heart_" . $value['ID'] . "').classList.toggle('green');
+            if (document.getElementById('heart_" . $value['ID'] . "').classList.contains('green')) {
+                //goon1
+            }
+            else {
+                //goon2
+            }
+        };
+        </script>";
+
+        $i++;
+    }
+
+} catch (PDOException $err) {
+    echo "Error: " . $err->getMessage();
+}

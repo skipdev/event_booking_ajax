@@ -7,45 +7,40 @@
  */
 
 require 'config.php';
-$rowCount = 0;
+
 try {
-    $stmt = $conn->prepare("SELECT id, name, type, description, recommended FROM venues");
+    $sql = "SELECT * FROM venues";
+    $stmt = $conn->prepare($sql);
     $stmt->execute();
-    //associative array
-    $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    $result = $stmt->fetchAll();
 
-    print "<table class='venues_table'>\n";
-    print "<tr>\n";
+    echo "<table class='venues_table'>";
+    
+    echo "<tr>";
+        echo "<th>Name</th>";
+        echo "<th>Type</th>";
+        echo "<th>Description</th>";
+        echo "<th>Username</th>";
+        echo "<th>Recommend?</th>";
+    echo "</tr>";
 
-    foreach ($result[0] as $key => $nothing){
-        print "<th>$key</th>";
+    $i = 0;
+    foreach ($result as $key => $value) {
+        echo "<tr>";
+            echo "<td class='venues_table--cell id_cell' id='id_".$value['ID']."'>" . $value['ID'] . "</td>";
+            echo "<td class='venues_table--cell' id='name_".$value['ID']."'>" . $value['name'] . "</td>";
+            echo "<td class='venues_table--cell' id='type_".$value['ID']."'>" . $value['type'] . "</td>";
+            echo "<td class='venues_table--cell' id='desc_".$value['ID']."'>" . $value['description'] . "</td>";
+            echo "<td class='venues_table--cell' id='user_".$value['ID']."'>" . $value['username'] . "</td>";
+            echo "<td class='venues_table--cell recommended_cell' id='rec_".$value['ID']."'>" . $value['recommended'] . "</td>";
+            echo "<td><i class='grey fas fa-heart' id='heart_".$value['ID']."'></i></td>";
+        echo "</tr>";
+        $i++;
     }
-    print "</tr>";
+    echo "</table>";
 
-    $columnCount = 0;
-    foreach ($result as $row){
-        $rowCount =+ 1;
-        print "<tr class='venues_table--row-".$rowCount."'>";
-        foreach ($row as $key => $value){
-            $columnCount += 1;
-            if($columnCount = 4) {
-                print "<td class='venues_table--cell venues_table--cell-rec'>$value</td>";
-            }
-            else if ($columnCount = 0){
-                print "<td class='venues_table--cell venues_table--cell-id'>$value</td>";
-            }
-            else {
-                print "<td class='venues_table--cell'>$value</td>";
-            }
-        }
-        print "<td><i class='grey fas fa-heart'></i></td>";
-        print "</tr>\n";
-    }
-
-    print "</table>\n";
-
-}
-catch(PDOException $err) {
+} catch (PDOException $err) {
     echo "Error: " . $err->getMessage();
 }
+
 

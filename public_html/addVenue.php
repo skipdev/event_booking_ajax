@@ -9,7 +9,6 @@ session_start();
 require 'config.php';
 require 'functions.php';
 include 'insertVenue.php';
-include 'recommend.php';
 
 $loggedIn = session_status() == PHP_SESSION_ACTIVE;
 ?>
@@ -53,5 +52,8 @@ $loggedIn = session_status() == PHP_SESSION_ACTIVE;
         <?php endif; ?>
     </div>
 </div>
+
+<?php include 'recommend.php' ?>
+
 </body>
 </html>

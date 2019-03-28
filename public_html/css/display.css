@@ -10,8 +10,12 @@
 }
 
 /*get the 'recommended' table cells only*/
-.venues_table--cell:nth-child(4n+1) {
+.recommended_cell {
     text-align: center;
     color: #1DD05E;
     background-color: white;
+}
+
+.id_cell {
+    display: none;
 }
