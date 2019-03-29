@@ -33,45 +33,18 @@ if ($row = $stmt->fetch()) {
     <title>home</title>
     <link rel="stylesheet" type="text/css" href="css/general.css">
     <link rel="stylesheet" type="text/css" href="css/display.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script>
-       $(document).ready(function() {
-             $('#search_field').unbind().keyup(function(e) {
-                   let value = $(this).val();
-                   if (value.length>0) {
-                      searchData(value);
-                   }
-                   else {
-                      $('#search_results').hide();
-                   }
-                }
-             );
-          }
-       );
-       function searchData(val){
-          $('#search_results').show();
-          $('#search_results').html('<div><img src="https://loading.io/spinners/double-ring/lg.double-ring-spinner.gif" width="50px;" height="50px"> <span class="wait_text">Please Wait...</span></div>');
-          $.post('control.php',{
-                'search_field': val}
-             , function(data){
-                if(data != "")
-                   $('#search_results').html(data);
-                else
-                   $('#search_results').html("<div class='search-result'>No Result Found...</div>");
-             }
-          ).fail(function(xhr, ajaxOptions, thrownError) {
-                alert(thrownError);
-             }
-          );
-       }
-    </script>
+    <script src="js/search.js"></script>
+    <script src="js/updateRec.js"></script>
+    <script src="js/readMore.js"></script>
 </head>
 <body>
     <div class="inner">
         <div class="center flex column">
 
             <!--If the user is logged in, welcome them by name-->
-            <?php if($loggedIn): ?>
+            <?php if($loggedIn && $name !=''): ?>
                 <h2 class="index_welcome">Welcome, <?php echo $name ?>!</h2>
 
                 <!--Allow user to search for a venue-->

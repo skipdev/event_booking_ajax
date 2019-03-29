@@ -34,6 +34,7 @@ try {
             echo "<td class='venues_table--cell' id='user_".$value['ID']."'>" . $value['username'] . "</td>";
             echo "<td class='venues_table--cell recommended_cell' id='rec_".$value['ID']."'>" . $value['recommended'] . "</td>";
             echo "<td><i onClick='updateRec(".$value['ID'].");' class='grey fas fa-heart' id='heart_".$value['ID']."'></i></td>";
+            echo "<td class='read-more_cell' onClick='readMore(".$value['ID'].");' id='more_".$value['ID']."'>Read more...</td>";
         echo "</tr>";
         $i++;
     }

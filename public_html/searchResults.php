@@ -18,7 +18,7 @@ class search {
             $count = $stmt->rowCount();
             echo "Total results found: $count.<br>";
             $result = "";
-            echo "<table><tr><th>Name</th><th>Type</th><th>Description</th><th>Username</th><th>Recommend?</th></tr>";
+            echo "<table><tr><th>Name</th><th>Type</th><th>Description</th><th>Username</th><th>Recommend?</th><th></th></tr>";
             if ($count  > 0){
                 while($value = $stmt->fetch(PDO::FETCH_ASSOC)) {
                     $id = "<tr><td class='venues_table--cell id_cell search_result' id='id_".$value['ID']."'>" . $value['ID'] . "</td>";
@@ -27,8 +27,9 @@ class search {
                     $desc = "<td class='venues_table--cell' id='desc_".$value['ID']."'>" . $value['description'] . "</td>";
                     $username = "<td class='venues_table--cell' id='user_".$value['ID']."'>" . $value['username'] . "</td>";
                     $rec = "<td class='venues_table--cell recommended_cell' id='rec_".$value['ID']."'>" . $value['recommended'] . "</td>";
-                    $heart =  "<td><i class='grey fas fa-heart' id='heart_".$value['ID']."'></i></td></tr>";
-                    $result = $result.$id.$name.$type.$desc.$username.$rec.$heart;
+                    $heart =  "<td><i class='grey fas fa-heart' id='heart_".$value['ID']."' onClick='updateRec(".$value['ID'].");'></i></td></tr>";
+                    $more = "<td class='read-more_cell' onClick='readMore(".$value['ID'].");' id='more_".$value['ID']."'>Read more...</td>";
+                    $result = $result.$id.$name.$type.$desc.$username.$rec.$heart.$more;
                 }
                 return $result ;
             }
