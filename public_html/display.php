@@ -9,8 +9,8 @@
 require 'config.php';
 
 try {
-    $sql = "SELECT * FROM venues";
-    $stmt = $conn->prepare($sql);
+    $query = "SELECT * FROM venues";
+    $stmt = $conn->prepare($query);
     $stmt->execute();
     $result = $stmt->fetchAll();
 
