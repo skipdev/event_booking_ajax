@@ -1,0 +1,90 @@
+@import url('https://fonts.googleapis.com/css?family=Nunito');
+
+* {
+    font-family: Nunito, sans-serif;
+}
+
+.inner {
+    margin: 0 20%;
+}
+
+.center {
+    text-align: center;
+    justify-content: center;
+    align-content: center;
+}
+
+.flex {
+    display: flex;
+}
+
+.column {
+    flex-direction: column;
+}
+
+.row {
+    flex-direction: row;
+}
+
+.generic_field {
+    color: #1DD05E;
+    background-color: white;
+    font-size: 1.2em;
+    border-radius: 20px;
+    padding: .8em;
+    display: block;
+    text-align: left;
+    margin-bottom: 2em;
+    border: solid white !important;
+}
+
+.generic_dropdown {
+    color: white;
+    background-color: #1DD05E;
+}
+
+.generic_label {
+    color: white;
+    font-size: 1.1em;
+    display: block;
+    text-align: left;
+}
+
+.generic_form {
+    color: white;
+    align-self: center;
+    background-color: #1DD05E;
+    opacity: 90%;
+    border-radius: 1em;
+    padding: 2em;
+    width: 50%;
+    margin: 2em 0;
+}
+
+.generic_button {
+    text-align: center;
+    justify-self: center;
+    font-size: 1.3em;
+    color: white;
+    border: solid white;
+    background-color: #1DD05E;
+    margin-top: 2em;
+    margin-bottom: 1em;
+    align-self: center;
+    width: 45%;
+}
+
+a:link,
+a:visited,
+a:hover,
+a:active {
+    color: #1DD05E;
+}
+
+.green {
+    color: #1DD05E;
+}
+
+.grey {
+    color: lightgrey;
+}
