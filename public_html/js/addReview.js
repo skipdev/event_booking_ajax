@@ -8,6 +8,7 @@ function addReview(id, username, isApproved) {
       cache: true,
       success: function (response) {
          alert('Review Submitted');
+         location.reload();
       }
    });
 }

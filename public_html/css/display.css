@@ -27,3 +27,15 @@
     border-radius: 5em;
     text-align: center;
 }
+
+.reviews_table {
+    margin: 3em 1em;
+}
+
+.reviews_table--cell {
+    margin-left: 2em;
+}
+
+.reviews_table--title {
+    margin-bottom: 0.5em;
+}
