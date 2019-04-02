@@ -30,10 +30,20 @@ $admin = $_SESSION["admin"];
     <div class="inner">
         <div class="center flex column">
             <form action="" method="post" class="center generic_form flex column" id="insert_form">
+
+                <?php
+                $query = "SELECT * FROM venues WHERE ID = $venueId";
+                $stmt = $conn->prepare($query);
+                $stmt->execute();
+                $result = $stmt->fetchAll();
+                while($row = $stmt->fetchAll()) {
+                echo "Name: " . $row["name"] . "<br>Type: " . $row["type"] . "<br>Description:" . $row["description"];} ?>
+
                 <p class="generic_label">Add a review:</p>
                 <input type="text" name="review" class="generic_field" id="user_review"/>
                 <button type='button' name='submit' value="Add Review +" id='insert_button' class='generic_button generic_field' onClick="addReview(<?php echo $venueId .", '". $username ."', ". $admin ?>);"></button><br />
             </form>
+
             <?php
                 try {
                     $query = "SELECT * FROM reviews WHERE venueID = $venueId ORDER BY id";
@@ -41,25 +51,42 @@ $admin = $_SESSION["admin"];
                     $stmt->execute();
                     $result = $stmt->fetchAll();
 
-                    echo "<table class='venues_table'>";
+                    echo "<table class='reviews_table'>";
 
                     echo "<tr>";
                     echo "<th>Venue ID</th>";
                     echo "<th>Username</th>";
                     echo "<th>Review</th>";
                     echo "<th>Approved</th>";
+                    if ($admin == 1) {
+                        echo "<th>Pending Approval</th>";
+                    }
                     echo "</tr>";
 
                     $i = 0;
                     foreach ($result as $key => $value) {
-                        echo "<tr>";
-                        echo "<td class='venues_table--cell id_cell' id='id_".$value['ID']."'>" . $value['ID'] . "</td>";
-                        echo "<td class='venues_table--cell' id='venueid_".$value['ID']."'>" . $value['venueID'] . "</td>";
-                        echo "<td class='venues_table--cell' id='username_".$value['ID']."'>" . $value['username'] . "</td>";
-                        echo "<td class='venues_table--cell' id='review_".$value['ID']."'>" . $value['review'] . "</td>";
-                        echo "<td class='venues_table--cell' id='approved_".$value['ID']."'>" . $value['approved'] . "</td>";
-                        echo "</tr>";
-                        $i++;
+                        if ($value['approved'] == 0) {
+                            if ($admin == 1) {
+                                echo "<tr>";
+                                echo "<td class='reviews_table--cell id_cell' id='id_" . $value['ID'] . "'>" . $value['ID'] . "</td>";
+                                echo "<td class='reviews_table--cell' id='venueid_" . $value['ID'] . "'>" . $value['venueID'] . "</td>";
+                                echo "<td class='reviews_table--cell' id='username_" . $value['ID'] . "'>" . $value['username'] . "</td>";
+                                echo "<td class='reviews_table--cell' id='review_" . $value['ID'] . "'>" . $value['review'] . "</td>";
+                                echo "<td class='reviews_table--cell' id='approved_" . $value['ID'] . "'>" . $value['approved'] . "</td>";
+                                echo "<td class='reviews_table--cell' id='approve-button_" . $value['ID'] . "'>click</td>";
+                                echo "</tr>";
+                                $i++;
+                            }
+                        }
+                        else {
+                            echo "<tr>";
+                            echo "<td class='reviews_table--cell id_cell' id='id_" . $value['ID'] . "'>" . $value['ID'] . "</td>";
+                            echo "<td class='reviews_table--cell' id='venueid_" . $value['ID'] . "'>" . $value['venueID'] . "</td>";
+                            echo "<td class='reviews_table--cell' id='username_" . $value['ID'] . "'>" . $value['username'] . "</td>";
+                            echo "<td class='reviews_table--cell' id='review_" . $value['ID'] . "'>" . $value['review'] . "</td>";
+                            echo "<td class='reviews_table--cell' id='approved_" . $value['ID'] . "'>" . $value['approved'] . "</td>";
+                            echo "</tr>";
+                        }
                     }
                     echo "</table>";
 
