@@ -9,6 +9,8 @@
     $user = 'assign150';
     $password = 'oob8Ce0h';
     $dbname = 'assign150';
+
+    $conn = new PDO("mysql:host=$host;dbname=$dbname;", $user, $password);
     try {
         $conn = new PDO("mysql:host=$host;dbname=$dbname;", $user, $password);
     }

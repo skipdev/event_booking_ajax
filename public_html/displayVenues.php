@@ -18,7 +18,7 @@ try {
 }
 ?>
 
-<table class="table table-bordered table-condensed">
+<table class="venues_table">
     <thead>
     <tr>
         <th>Name</th>
