@@ -20,6 +20,7 @@ $stmt->execute([$username, $password]);
 if ($row = $stmt->fetch()) {
     $_SESSION["user"] = $row['name'];
     $_SESSION["admin"] = $row['isadmin'];
+    $_SESSION["username"] = $row['username'];
     redirect('index.php');
 } else {
     $output = "Hi";
@@ -32,23 +33,30 @@ if ($row = $stmt->fetch()) {
 <head>
     <title>home</title>
     <link rel="stylesheet" type="text/css" href="css/general.css">
+    <link rel="stylesheet" type="text/css" href="css/display.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="js/search.js"></script>
+    <script src="js/updateRec.js"></script>
+    <script src="js/readMore.js"></script>
 </head>
 <body>
     <div class="inner">
         <div class="center flex column">
 
             <!--If the user is logged in, welcome them by name-->
-            <?php if($loggedIn): ?>
+            <?php if($loggedIn && $name !=''): ?>
                 <h2 class="index_welcome">Welcome, <?php echo $name ?>!</h2>
 
                 <!--Allow user to search for a venue-->
                 <h3>Search for a venue here: </h3>
                 <form action="" method="post" class="center generic_form flex column">
-                    <p class="generic_label">Venue Name: </p>
-                    <input type="text" name="venueDesc" class="generic_field"/>
-                    <!--TODO: Implement AJAX-->
-                    <input type="submit" name='submit' value="Search →" class='generic_button generic_field'/>
+                    <p class="generic_label">Venue Type: </p>
+                    <input type="text" name="searchData" id='search_field' class="generic_field"/>
                 </form>
+
+                <div id="search_results" style="border:solid 1px #BDC7D8;display:none; ">
+                </div>
 
                 <h3>You can also add a new venue by clicking <a href="addVenue.php">here</a>.</h3>
 

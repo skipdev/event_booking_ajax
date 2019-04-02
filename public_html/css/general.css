@@ -80,3 +80,11 @@ a:hover,
 a:active {
     color: #1DD05E;
 }
+
+.green {
+    color: #1DD05E;
+}
+
+.grey {
+    color: lightgrey;
+}

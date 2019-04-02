@@ -19,6 +19,7 @@ $stmt->execute([$username, $password]);
 
 if ($row = $stmt->fetch()) {
     $_SESSION["user"] = $row['name'];
+    $_SESSION["username"] = $row['username'];
     $_SESSION["admin"] = $row['isadmin'];
     redirect('index.php');
 } else {

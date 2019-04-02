@@ -18,6 +18,10 @@ $name = $_SESSION["user"];
 <head>
     <title>home</title>
     <link rel="stylesheet" type="text/css" href="css/general.css">
+    <link rel="stylesheet" type="text/css" href="css/display.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="js/updateRec.js"></script>
 </head>
 <body>
 <div class="inner">
@@ -26,7 +30,7 @@ $name = $_SESSION["user"];
 
         <!--Allow user to add a new venue-->
         <h1>Add a new Venue</h1>
-        <form action="" method="post" class="center generic_form flex column">
+        <form action="" method="post" class="center generic_form flex column" id="addVenue">
             <p class="generic_label">Venue Name: </p>
             <input type="text" name="venueName" class="generic_field">
             <p class="generic_label">Venue Type: </p>
@@ -52,5 +56,8 @@ $name = $_SESSION["user"];
         <?php endif; ?>
     </div>
 </div>
+
+<?php include 'recommend.php' ?>
+
 </body>
 </html>

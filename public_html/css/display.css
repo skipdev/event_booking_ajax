@@ -1,0 +1,29 @@
+.venues_table {
+    padding: 2em;
+}
+
+.venues_table--cell {
+    background-color: #1DD05E;
+    padding: .5em;
+    margin: 2em;
+    color: white;
+}
+
+/*get the 'recommended' table cells only*/
+.recommended_cell {
+    text-align: center;
+    color: #1DD05E;
+    background-color: white;
+}
+
+.id_cell {
+    display: none;
+}
+
+.read-more_cell {
+    padding: .5em;
+    color: #1DD05E;
+    border: 2px solid #1DD05E;
+    border-radius: 5em;
+    text-align: center;
+}
