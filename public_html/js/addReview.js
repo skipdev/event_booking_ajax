@@ -7,7 +7,7 @@ function addReview(id, username, isApproved) {
       data: "id=" + id + "&username=" + username + "&review=" + review + "&isApproved=" + isApproved,
       cache: true,
       success: function (response) {
-         // alert('Review Submitted');
+         alert('Review submitted for approval.');
          location.reload();
       }
    });

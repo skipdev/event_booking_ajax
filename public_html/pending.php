@@ -12,6 +12,7 @@ require 'config.php';
 require 'functions.php';
 
 $admin = $_SESSION["admin"];
+$loggedIn = session_status() == PHP_SESSION_ACTIVE;
 ?>
 
 <html>
@@ -26,18 +27,17 @@ $admin = $_SESSION["admin"];
 <body>
     <div class="inner">
         <div class="center flex column">
-            <?php
-                try {
-                    $query = "SELECT * FROM reviews ORDER BY id";
-                    $stmt = $conn->prepare($query);
-                    $stmt->execute();
-                    $result = $stmt->fetchAll();
+            <?php if($loggedIn && $admin == 1): ?>
+                <?php
+                    try {
+                        $query = "SELECT * FROM reviews ORDER BY id";
+                        $stmt = $conn->prepare($query);
+                        $stmt->execute();
+                        $result = $stmt->fetchAll();
 
-                    echo "<table class='reviews_table reviews_table--pending'>";
-                    echo "<h2>Pending Reviews...</h2>";
-                    if (empty($results)) {
-                        echo 'No pending reviews.';
-                    } else {
+                        echo "<table class='reviews_table reviews_table--pending'>";
+                        echo "<h2>Pending Reviews...</h2>";
+
                         echo "<tr>";
                         echo "<th>Venue ID</th>";
                         echo "<th>Username</th>";
@@ -46,6 +46,7 @@ $admin = $_SESSION["admin"];
                         echo "</tr>";
 
                         $i = 0;
+                        $noReviews = false;
                         foreach ($result as $key => $value) {
                             if ($value['approved'] == 0) {
                                 if ($admin == 1) {
@@ -59,16 +60,25 @@ $admin = $_SESSION["admin"];
                                     $i++;
                                 }
                             }
+                            else {
+                                $noReviews = true;
+                            }
                         }
-                    }
-                    echo "</table>";
+                        if ($noReviews == true) {
+                            echo 'No pending reviews.';
+                        }
+                        echo "</table>";
 
-                } catch (PDOException $err) {
-                    echo "Error: " . $err->getMessage();
-                }
-            ?>
-        </div>
-        <a href="reviews.php">Click here to go back.</a>
+                    } catch (PDOException $err) {
+                        echo "Error: " . $err->getMessage();
+                    }
+                ?>
+            </div>
+            <a href="reviews.php">Click here to go back.</a>
+        <?php else: ?>
+            <h1>Hey there! It seems that you're either not logged in or not an admin...</h1>
+            <a href="login.php">Click here to login</a> or <a href="reviews.php">Click here to go back.</a>
+        <?php endif; ?>
     </div>
 </body>
 </html>

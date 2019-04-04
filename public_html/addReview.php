@@ -12,13 +12,9 @@ $username = @$_POST['username'];
 $review = @$_POST['review'];
 $approved = @$_POST['isApproved'];
 
-$stmt = $conn->prepare("INSERT INTO reviews (venueID, username, review, approved) VALUES(:id, :username, :review, :approved)");
+$query = ("INSERT INTO reviews (venueID, username, review, approved) VALUES(?,?,?,?)");
 
-$stmt->bindparam(':id', $id);
-$stmt->bindparam(':username', $username);
-$stmt->bindparam(':review', $review);
-$stmt->bindparam(':approved', $approved);
-
-$stmt->execute();
+$stmt = $conn->prepare($query);
+$stmt->execute([$id, $username, $review, $approved]);
 
 header('Location: reviews.php');

@@ -11,5 +11,3 @@ $id = @$_POST['id'] ;
 
 $stmt = $conn->prepare("UPDATE venues SET recommended = (recommended + 1) WHERE id = '$id'");
 $result = $stmt->execute();
-
-header('Location: index.php');
