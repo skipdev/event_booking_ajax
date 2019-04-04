@@ -8,9 +8,9 @@
 session_start();
 require 'config.php';
 require 'functions.php';
-include 'insertVenue.php';
 
 $loggedIn = session_status() == PHP_SESSION_ACTIVE;
+$username = $_SESSION["username"];
 ?>
 
 <html>
@@ -21,6 +21,7 @@ $loggedIn = session_status() == PHP_SESSION_ACTIVE;
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="js/updateRec.js"></script>
+    <script src="js/insertVenue.js"></script>
 </head>
 <body>
 <div class="inner">
@@ -31,9 +32,9 @@ $loggedIn = session_status() == PHP_SESSION_ACTIVE;
         <h1>Add a new Venue</h1>
         <form action="" method="post" class="center generic_form flex column" id="addVenue">
             <p class="generic_label">Venue Name: </p>
-            <input type="text" name="venueName" class="generic_field">
+            <input type="text" name="venueName" class="generic_field" id="venueName">
             <p class="generic_label">Venue Type: </p>
-            <select name="venueType" class="generic_field generic_dropdown">
+            <select name="venueType" class="generic_field generic_dropdown" id="venueType">
                 <option value="Restaurant">Restaurant</option>
                 <option value="Bar">Bar</option>
                 <option value="Pub">Pub</option>
@@ -42,8 +43,8 @@ $loggedIn = session_status() == PHP_SESSION_ACTIVE;
                 <option value="Club">Club</option>
             </select>
             <p class="generic_label">Description: </p>
-            <input type="text" name="venueDesc" class="generic_field"/>
-            <input type="submit" name='submit' value="Submit →" class='generic_button generic_field'/>
+            <input type="text" name="venueDesc" class="generic_field" id="venueDesc"/>
+            <button type="button" name='submit' value="Submit →" class='generic_button generic_field' onClick="insertVenue(<?php echo "'".$username."'" ?>)"></button>
         </form>
         <?php include 'display.php' ?>
         <a href="index.php">Back to search</a>
@@ -54,8 +55,6 @@ $loggedIn = session_status() == PHP_SESSION_ACTIVE;
         <?php endif; ?>
     </div>
 </div>
-
-<?php include 'recommend.php' ?>
 
 </body>
 </html>

@@ -11,10 +11,10 @@
     $dbname = 'assign150';
 
     $conn = new PDO("mysql:host=$host;dbname=$dbname;", $user, $password);
-    try {
-        $conn = new PDO("mysql:host=$host;dbname=$dbname;", $user, $password);
-    }
-    catch (PDOException $e) {
-        die('Error: ' . $e->getMessage());
-    }
+//    try {
+//        $conn = new PDO("mysql:host=$host;dbname=$dbname;", $user, $password);
+//    }
+//    catch (PDOException $e) {
+//        die('Error: ' . $e->getMessage());
+//    }
 ?>

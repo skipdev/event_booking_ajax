@@ -11,9 +11,10 @@ session_start();
 require 'config.php';
 require 'functions.php';
 
+// Set session variables in order to add this information to a review
 $venueId = $_SESSION["venueId"];
 $username = $_SESSION["username"];
-$admin = $_SESSION["admin"];
+$admin = $_SESSION["admin"]
 
 ?>
 
@@ -32,6 +33,8 @@ $admin = $_SESSION["admin"];
         <div class="center flex column">
 
             <?php
+            require 'config.php';
+            // Get the venue name and type from the session variable $venueId.
             $query = "SELECT * FROM venues WHERE ID = $venueId";
             $stmt = $conn->prepare($query);
             $stmt->execute();
@@ -41,15 +44,19 @@ $admin = $_SESSION["admin"];
             }
             ?>
 
+            <!--Allow user to add a review-->
             <form action="" method="post" class="center generic_form flex column" id="insert_form">
-
                 <p class="generic_label">Add a review:</p>
                 <input type="text" name="review" class="generic_field" id="user_review"/>
-                <button type='button' name='submit' value="Add Review +" id='insert_button' class='generic_button generic_field' onClick="addReview(<?php echo $venueId .", '". $username ."', ". $admin ?>);"></button><br />
+                <button type='button' name='submit' value="Add Review +" id='insert_button' class='generic_button generic_field'
+                        onClick="addReview(<?php echo $venueId .", '". $username ."', ". $admin ?>);">
+                        <!--Above statement sends to AJAX the venue id, user's name, and whether the user is an admin or not-->
+                </button><br/>
             </form>
 
             <?php
                 try {
+                    // Select everything from the reviews table
                     $query = "SELECT * FROM reviews WHERE venueID = $venueId ORDER BY id";
                     $stmt = $conn->prepare($query);
                     $stmt->execute();
@@ -66,6 +73,7 @@ $admin = $_SESSION["admin"];
 
                     $i = 0;
                     foreach ($result as $key => $value) {
+                        // Output the approved reviews in a table
                         if ($value['approved'] == 1) {
                             echo "<tr>";
                             echo "<td class='reviews_table--cell id_cell' id='id_" . $value['ID'] . "'>" . $value['ID'] . "</td>";
@@ -94,6 +102,7 @@ $admin = $_SESSION["admin"];
                         $i = 0;
 
                         foreach ($result as $key => $value) {
+                            // Output the non-approved reviews in a table
                             if ($value['approved'] == 0) {
                                 if ($admin == 1) {
                                     echo "<tr>";

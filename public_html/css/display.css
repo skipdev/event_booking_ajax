@@ -39,3 +39,7 @@
 .reviews_table--title {
     margin-bottom: 0.5em;
 }
+
+#search_results {
+    border: solid 1px #BDC7D8;
+}

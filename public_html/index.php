@@ -9,23 +9,24 @@ session_start();
 require 'config.php';
 require 'functions.php';
 
+// Set session variable to see if the user is logged in or not
 $loggedIn = session_status() == PHP_SESSION_ACTIVE;
 $name = $_SESSION["user"];
 
+// Login using data from the login.php form
 $username = $_POST["username"];
 $query = "SELECT * FROM users WHERE name = ? and password = ?";
 $stmt = $conn->prepare($query);
 $stmt->execute([$username, $password]);
 
+// Set session variables from the logged in user's information
 if ($row = $stmt->fetch()) {
     $_SESSION["user"] = $row['name'];
     $_SESSION["admin"] = $row['isadmin'];
     $_SESSION["username"] = $row['username'];
     redirect('index.php');
 } else {
-    $output = "Hi";
-//    alert($output);
-//    redirect('login.php');
+    $output = "Error";
 }
 ?>
 
@@ -55,12 +56,13 @@ if ($row = $stmt->fetch()) {
                     <input type="text" name="searchData" id='search_field' class="generic_field"/>
                 </form>
 
-                <div id="search_results" style="border:solid 1px #BDC7D8;display:none; ">
-                </div>
+                <!--Display the AJAX search results-->
+                <div id="search_results" style="display: none;"></div>
 
-                <h3>You can also add a new venue by clicking <a href="addVenue.php">here</a>.</h3>
-
+                <h3>You can add a new venue by clicking <a href="addVenue.php">here</a>.</h3>
                 <a href="logout.php">Click to log out</a>
+
+            <!--If the user is not logged in, take them to the login form.-->
             <?php else: ?>
                 <h1>Hey there! It seems that you're not logged in...</h1>
                 <a href="login.php">Click here to access this page.</a>

@@ -22,9 +22,6 @@ if ($row = $stmt->fetch()) {
     $_SESSION["username"] = $row['username'];
     $_SESSION["admin"] = $row['isadmin'];
     redirect('index.php');
-} else {
-    $output = "Sorry it's not right lol";
-    alert($output);
 }
 ?>
 

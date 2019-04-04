@@ -13,7 +13,7 @@ $(document).ready(function() {
 );
 function searchData(val){
    $('#search_results').show();
-   $('#search_results').html('<div><img src="https://loading.io/spinners/double-ring/lg.double-ring-spinner.gif" width="50px;" height="50px"> <span class="wait_text">Please Wait...</span></div>');
+   $('#search_results').html('<div><img src="https://loading.io/spinners/double-ring/lg.double-ring-spinner.gif" width="50px;" height="50px"> <span class="wait_text">Loading...</span></div>');
    $.post('control.php',{
          'search_field': val}
       , function(data){

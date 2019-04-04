@@ -6,7 +6,8 @@ function updateRec(id) {
       cache: true,
       success: function(response)
       {
-         alert("Record updated");
+         // alert("Record updated");
+         location.reload();
       }
    });
 }

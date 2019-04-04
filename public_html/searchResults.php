@@ -28,7 +28,7 @@ class search {
                     $username = "<td class='venues_table--cell' id='user_".$value['ID']."'>" . $value['username'] . "</td>";
                     $rec = "<td class='venues_table--cell recommended_cell' id='rec_".$value['ID']."'>" . $value['recommended'] . "</td>";
                     $heart =  "<td><i class='grey fas fa-heart' id='heart_".$value['ID']."' onClick='updateRec(".$value['ID'].");'></i></td></tr>";
-                    $more = "<td class='read-more_cell' onClick='readMore(".$value['ID'].");' id='more_".$value['ID']."'>Read more...</td>";
+                    $more = "<td class='read-more_cell' onClick='readMore(".$value['ID'].");' id='more_".$value['ID']."'>Reviews -></td>";
                     $result = $result.$id.$name.$type.$desc.$username.$rec.$heart.$more;
                 }
                 return $result ;
